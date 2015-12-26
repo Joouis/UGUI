@@ -66,6 +66,20 @@ info: $(PROJ_NAME).elf
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo $@
 
+OPENOCD_INS = "flash write_image erase stm32f429-example.bin 0x8000000"
+
+flash: $(PROJ_NAME.bin)
+	openocd \
+		-f interface/stlink-v2.cfg \
+		-f target/stm32f4x.cfg \
+		-c "init" \
+		-c "reset init" \
+		-c "flash probe 0" \
+		-c "flash info 0" \
+		-c $(OPENOCD_INS) \
+		-c "reset run" -c shutdown 
+
+
 clean:
 	rm -f $(OBJS)
 	rm -f $(PROJ_NAME).elf

@@ -43,7 +43,7 @@ FPU = -mfpu=fpv4-sp-d16 -mfloat-abi=hard -D__FPU_USED
 DEFINES = -DSTM32F4XX -DSTM32F429_439xx -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__
 
 CFLAGS = $(MCU) $(DEFINES) $(INCLUDES) -g2 -Wall -O0 -c
-LDFLAGS = $(MCU) -g2 -nostartfiles -Wl,-Map=STM32F429.map -O0 -Wl,--gc-sections -Tld/stm32f4.ld
+LDFLAGS = $(MCU) -g2 -nostartfiles -Wl,-Map=$(PROJ_NAME).map -O0 -Wl,--gc-sections -Tld/stm32f4.ld
 
 ##########################################
 # Targets
